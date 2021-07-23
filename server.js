@@ -1,9 +1,12 @@
 const express = require("express");
 const mongojs = require("mongojs");
+const routes = require('./controllers');
 
 const app = express();
+app.use(routes);
+
 const databaseUrl = "workoutDB";
-const collections = ["plans"];
+const collections = ["workouts"];
 
 const db = mongojs(databaseUrl, collections);
 
