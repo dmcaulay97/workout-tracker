@@ -11,7 +11,7 @@ const cardioExcerciseSchema = new Schema({
     name: {
         type: String,
         trim: true,
-        required: "type is required"
+        required: "name is required"
     },
 
     distance: {

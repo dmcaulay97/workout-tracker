@@ -5,34 +5,32 @@ const cardioExcerciseSchema = new Schema({
     type: {
         type: String,
         trim: true,
-        required: "type is required"
     },
 
     name: {
         type: String,
         trim: true,
-        required: "type is required"
     },
 
     weight: {
         type: Number,
-        required: "weight is required"
     },
 
     sets: {
         type: Number,
-        required: "sets is required"
     },
 
     reps: {
         type: Number,
-        required: "reps is required"
     },
 
 
     duration: {
         type: Number,
-        required: "duration is required"
+    },
+
+    distance: {
+        type: Number,
     },
 
 });
