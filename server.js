@@ -21,12 +21,13 @@ app.get("/api/workouts", (req, res) => {
     db.Workout.aggregate([
         {
             $addFields: {
-                totalDuration: { $sum: "$excercises.duration" }
+                totalDuration: { $sum: "$exercises.duration" }
             }
         }
     ])
         .then((data) => {
             console.log(data);
+            console.log(data[0].exercises)
             res.json(data)
         })
         .catch(err => {
