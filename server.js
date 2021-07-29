@@ -20,7 +20,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { use
 app.get("/api/workouts", (req, res) => {
     db.Workout.find({}).sort({ day: 1 })
         .then(data => {
-            console.log(data);
+
+            data.forEach((workout) => {
+                let totalDuration = 0;
+                workout.exercises.forEach((e) => {
+                    totalDuration += e.duration
+                    console.log(totalDuration);
+                })
+                workout.totalDuration = totalDuration;
+                console.log(workout.totalDuration);
+                console.log(workout);
+            });
             res.json(data)
         })
         .catch(err => {
