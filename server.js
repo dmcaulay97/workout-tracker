@@ -18,19 +18,15 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 app.get("/api/workouts", (req, res) => {
-    db.Workout.find({}).sort({ day: 1 })
-        .then(data => {
-
-            data.forEach((workout) => {
-                let totalDuration = 0;
-                workout.exercises.forEach((e) => {
-                    totalDuration += e.duration
-                    console.log(totalDuration);
-                })
-                workout.totalDuration = totalDuration;
-                console.log(workout.totalDuration);
-                console.log(workout);
-            });
+    db.Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: { $sum: "$excercises.duration" }
+            }
+        }
+    ])
+        .then((data) => {
+            console.log(data);
             res.json(data)
         })
         .catch(err => {
