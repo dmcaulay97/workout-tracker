@@ -15,10 +15,10 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethods", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 app.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
+    db.Workout.find({}).sort({ day: 1 })
         .then(data => {
             console.log(data);
             res.json(data)
